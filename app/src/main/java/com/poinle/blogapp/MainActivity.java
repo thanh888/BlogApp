@@ -19,7 +19,16 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-               isFirstTime();
+                SharedPreferences userPre = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+                boolean isLoggedIn = userPre.getBoolean("isLoggedIn", false);
+
+                if (isLoggedIn){
+                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                    finish();
+                }
+                else {
+                    isFirstTime();
+                }
             }
         },1000);
     }
@@ -27,14 +36,15 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getApplication().getSharedPreferences("On Board", Context.MODE_PRIVATE);
         boolean isFirst = preferences.getBoolean("isFirst", true);
 
-        if (isFirst){
+        if(isFirst){
             SharedPreferences.Editor editor =  preferences.edit();
             editor.putBoolean("isFirst", false);
             editor.apply();
 
             startActivity(new Intent(MainActivity.this, OnBoardActivity.class));
             finish();
-        }else{
+        }
+        else{
             startActivity(new Intent(MainActivity.this, AuthActivity.class));
             finish();
         }

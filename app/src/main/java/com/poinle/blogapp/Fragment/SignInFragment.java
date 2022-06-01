@@ -1,6 +1,7 @@
 package com.poinle.blogapp.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,7 +24,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.poinle.blogapp.AuthActivity;
 import com.poinle.blogapp.Constant;
+import com.poinle.blogapp.HomeActivity;
 import com.poinle.blogapp.R;
 
 import org.json.JSONException;
@@ -146,9 +149,11 @@ public class SignInFragment extends Fragment {
                     editor.putString("name", user.getString("name"));
                     editor.putString("lastname", user.getString("lastname"));
                     editor.putString("photo", user.getString("photo"));
-
+                    editor.putBoolean("isLoggedIn", true);
                     editor.apply();
 
+                    startActivity(new Intent((AuthActivity) getContext(), HomeActivity.class));
+                    ((AuthActivity) getContext()).finish();
                     //if success
                     Toast.makeText(getContext(), "Login Success", Toast.LENGTH_SHORT).show();
                 }
