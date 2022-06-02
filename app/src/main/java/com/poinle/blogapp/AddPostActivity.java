@@ -56,10 +56,11 @@ public class AddPostActivity extends AppCompatActivity {
     private void init() {
         sharedPreferences = getApplication().getSharedPreferences("user", Context.MODE_PRIVATE);
         btnAddPost = findViewById(R.id.btnAddPost);
-        imagePost = findViewById(R.id.imagePostPhoto);
+        imagePost = findViewById(R.id.imgAddPost);
         editDesc = findViewById(R.id.txtDescPost);
         dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
+
         imagePost.setImageURI(getIntent().getData());
         try {
             bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), getIntent().getData());
@@ -83,7 +84,7 @@ public class AddPostActivity extends AppCompatActivity {
             try {
                 JSONObject object = new JSONObject(response);
                 if (object.getBoolean("success")){
-                    JSONObject postObject = new JSONObject("post");
+                    JSONObject postObject = new JSONObject("posts");
                     JSONObject userObject = new JSONObject("user");
 
                     User user = new User();
@@ -128,8 +129,6 @@ public class AddPostActivity extends AppCompatActivity {
             }
 
             //add params
-
-
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
