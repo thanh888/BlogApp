@@ -2,6 +2,8 @@ package com.poinle.blogapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +21,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.poinle.blogapp.Fragment.HomeFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,136 +35,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private TextInputLayout nameLayout, lastnameLayout;
-    private TextInputEditText editName, editLastname;
-    private TextView txtSelectPhoto;
-    CircleImageView circleImageView;
-    Button btnContinue;
-    private static final int GALLERY_AND_PROFILE = 1;
-    private Bitmap bitmap = null;
-    private SharedPreferences sharedPreferences;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-//        init();
-    }
-
-    private void init() {
-        sharedPreferences = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        nameLayout = findViewById(R.id.layoutNameUserInfor);
-        lastnameLayout = findViewById(R.id.layoutLastnameUserInfor);
-        editName = findViewById(R.id.editNameUserInfor);
-        editLastname = findViewById(R.id.editLastnameUserInfor);
-        txtSelectPhoto = findViewById(R.id.txtSelectPhoto);
-        circleImageView = findViewById(R.id.image_user);
-        btnContinue = findViewById(R.id.btnContinue);
-
-        txtSelectPhoto.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-
-            startActivityForResult(intent, GALLERY_AND_PROFILE);
-//            someActivityResultLauncher.launch(intent);
-        });
-        btnContinue.setOnClickListener(view -> {
-            if (validate()) {
-                saveUserInfor();
-            }
-        });
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.frameHomeContainer, new HomeFragment()).commit();
 
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_AND_PROFILE && resultCode == RESULT_OK) {
-            Uri imgUri = data.getData();
-            circleImageView.setImageURI(imgUri);
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-
-    public boolean validate() {
-
-        if (editName.getText().toString().isEmpty()) {
-            lastnameLayout.setErrorEnabled(true);
-            lastnameLayout.setError("Lastname is require");
-            return false;
-        }
-        if (editName.getText().toString().isEmpty()) {
-            nameLayout.setErrorEnabled(true);
-            nameLayout.setError("Name is require");
-            return false;
-        }
-        return true;
-    }
-
-    private void saveUserInfor() {
-        String name = editName.getText().toString().trim();
-        String lastname = editLastname.getText().toString().trim();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.SAVE_USER_INFOR, response -> {
-
-                try {
-                    JSONObject object = new JSONObject(response);
-                    if (object.getBoolean("success")){
-                        SharedPreferences.Editor editor =  sharedPreferences.edit();
-                        editor.putString("photo", object.getString("photo"));
-                        editor.apply();
-                        startActivity(new Intent());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-        }, error -> {
-            error.printStackTrace();
-        }) {
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                String token = sharedPreferences.getString("token", "");
-
-                HashMap<String, String> map = new HashMap<>();
-                map.put("Authorization", "Bearer" + token);
-                return map;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("name", name);
-                map.put("lastname", lastname);
-                map.put("photo", bitmapToString(bitmap));
-                return  map;
-            }
-
-
-
-
-        };
-    }
-    private String bitmapToString(Bitmap bitmap) {
-        if (bitmap!= null){
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-            byte[] array = byteArrayOutputStream.toByteArray();
-            return Base64.encodeToString(array, Base64.DEFAULT);
-        }
-        return "";
-    }
 
 }

@@ -4,13 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/drawable/button_round.xml" value="0.116" />
+        <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/drawable/icon_add.xml" value="0.116" />
         <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/activity_auth.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/activity_on_board_activiry.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/activity_user_infor.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/item_row.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/layout_account.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/layout_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/layout_post.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/layout_sign_in.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/layout/layout_sign_up.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidStudioProjects/BlogApp/app/src/main/res/menu/menu_main.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

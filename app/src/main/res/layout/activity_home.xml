@@ -1,83 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="50dp"
     tools:context=".HomeActivity">
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/frameHomeContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:layout_marginBottom="30dp"
-        android:gravity="center_horizontal"
-        android:text="UerInfor"/>
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@color/colorGrey"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/image_user"
-        android:layout_marginBottom="10dp"/>
+        android:layout_height="match_parent">
 
-    <TextView
+    </FrameLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Select photo"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16sp"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/txtSelectPhoto"/>
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:clickable="false"
+        android:fitsSystemWindows="false"
+        android:focusable="false">
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutNameUserInfor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editNameUserInfor"
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottom_app"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            android:inputType="text"
-            android:textSize="15sp" />
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            app:fabAlignmentMode="center"
+            app:fabCradleRoundedCornerRadius="16dp"
+            android:theme="@style/AppTheme.BottomAppBar"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bot_nav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:outlineAmbientShadowColor="@android:color/transparent"
+                android:outlineSpotShadowColor="@android:color/transparent"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/menu_main" />
 
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.bottomappbar.BottomAppBar>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutLastnameUserInfor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editLastnameUserInfor"
-            android:layout_width="match_parent"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Lastname"
-            android:inputType="text"
-            android:textSize="15sp" />
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/icon_add"
+            android:tint="@color/colorWhite"
+            app:layout_anchor="@id/bottom_app"
+            app:rippleColor="@color/colorWhite" />
 
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btnContinue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Continue"
-        android:background="@drawable/button_round"
-        android:textSize="17sp"
-        android:textColor="@color/colorWhite"
-        android:textAllCaps="false"
-        android:layout_marginBottom="60dp"
-        />
-
-</LinearLayout>
+</RelativeLayout>

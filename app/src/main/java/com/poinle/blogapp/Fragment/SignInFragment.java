@@ -28,6 +28,7 @@ import com.poinle.blogapp.AuthActivity;
 import com.poinle.blogapp.Constant;
 import com.poinle.blogapp.HomeActivity;
 import com.poinle.blogapp.R;
+import com.poinle.blogapp.UserInforActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

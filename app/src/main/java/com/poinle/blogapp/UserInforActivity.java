@@ -68,7 +68,6 @@ public class UserInforActivity extends AppCompatActivity {
         txtSelectPhoto.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
-
             startActivityForResult(intent, GALLERY_AND_PROFILE);
 //            someActivityResultLauncher.launch(intent);
         });
@@ -89,8 +88,6 @@ public class UserInforActivity extends AppCompatActivity {
             circleImageView.setImageURI(imgUri);
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
