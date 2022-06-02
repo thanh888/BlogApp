@@ -39,8 +39,8 @@ import java.util.Map;
 public class HomeFragment extends Fragment {
 
     private View view;
-    private RecyclerView recyclerView;
-    private ArrayList<Post> posts;
+    public static RecyclerView recyclerView;
+    public static ArrayList<Post> posts;
     private SwipeRefreshLayout refreshLayout;
     private PostAdapter postAdapter;
     private MaterialToolbar toolbar;

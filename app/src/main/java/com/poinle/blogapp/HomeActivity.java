@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.poinle.blogapp.Fragment.HomeFragment;
@@ -36,6 +37,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
+    private FloatingActionButton fab;
+    private static final int GALLERY_ADD_POST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,37 @@ public class HomeActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.frameHomeContainer, new HomeFragment()).commit();
 
+        init();
+
     }
+    private void init(){
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, GALLERY_ADD_POST);
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode== GALLERY_ADD_POST && resultCode==RESULT_OK){
+            Uri imgUri = data.getData();
+            Intent intent = new Intent(HomeActivity.this, AddPostActivity.class);
+            intent.setData(imgUri);
+            startActivity(intent);
+        }
+    }
+
+
+
+
+
+
+
+
+
 
 
 

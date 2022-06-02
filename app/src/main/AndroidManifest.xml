@@ -13,6 +13,9 @@
         android:theme="@style/Theme.BlogApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AddPostActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
